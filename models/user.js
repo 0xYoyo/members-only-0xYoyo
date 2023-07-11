@@ -8,12 +8,13 @@ const UserSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true, minLength: 4 },
   member: { type: Boolean },
+  admin: { type: Boolean },
 });
 
 UserSchema.virtual("name").get(function () {
   let fullname = "";
   if (this.first_name && this.last_name) {
-    fullname = `${this.first_name} ${this.family_name}`;
+    fullname = `${this.first_name} ${this.last_name}`;
   }
   return fullname;
 });

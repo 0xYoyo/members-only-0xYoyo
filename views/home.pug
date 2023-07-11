@@ -4,6 +4,11 @@ block content
   h1= title
   p Welcome to #{title}
   if user 
+    form(action="/logout", method="post") 
+      button Log out 
+    if !user.admin
+      p Admin?
+        a(href="/admin") Get your permissions
     if user.member 
       a(href="/new-message") New message 
     else  
@@ -18,5 +23,9 @@ block content
         div By #{message.createdBy.name} at #{message.timestamp} 
       h4= message.title 
       p= message.text
+    if user.admin 
+    p Click to delete message above:
+        a(href="/message-delete") Delete
   else 
     p There are no messages 
+  
