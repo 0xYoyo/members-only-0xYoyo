@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1=title
+
+    form(method='POST' action='')
+      div
+        label(for='title') Title:
+        input#title(type='text' placeholder='Policy updates' name='title' required='true' value=(undefined===message ? '' : message.title) )
+      div
+        label(for='text') Text:
+        input#text(type='text' placeholder='User data will now be saved no longer than 5 years' name='text' required='true' value=(undefined===message ? '' : message.text))
+      button(type='submit') Publish
+    
+    a(href="/home") Back to home  
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

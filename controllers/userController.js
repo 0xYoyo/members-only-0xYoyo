@@ -124,10 +124,43 @@ exports.user_login_post = [
 
 // Display User update form on GET.
 exports.user_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: User update GET");
+  res.render("join", { title: "Join the club" });
 });
 
 // Handle User update on POST.
-exports.user_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: User update POST");
-});
+exports.user_update_post = [
+  body("secretpass")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Secret password must be specified."),
+
+  asyncHandler(async (req, res, next) => {
+    // Extract errors
+    const errors = validationResult(req);
+
+    // Find the user and add membership
+    const user = await User.findById(req.user._id);
+
+    if (user === null) {
+      // No results.
+      const err = new Error("User not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if (!errors.isEmpty()) {
+      // Rerender with value and errors
+      res.render("join", {
+        title: "Join the club",
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Save valid data and redirect to new page
+      user.member = true;
+      await user.save();
+      res.redirect("/home");
+    }
+  }),
+];

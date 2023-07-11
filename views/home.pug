@@ -4,4 +4,19 @@ block content
   h1= title
   p Welcome to #{title}
   if user 
-    p logged in
+    if user.member 
+      a(href="/new-message") New message 
+    else  
+      a(href="/join") Join the club! 
+  else 
+    a(href="/sign-up") Sign up  
+    a(href="/log-in") Log in
+  
+  each message in messages
+    div
+      if user.member 
+        div By #{message.createdBy.name} at #{message.timestamp} 
+      h4= message.title 
+      p= message.text
+  else 
+    p There are no messages 
