@@ -10,7 +10,6 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 const homeRouter = require("./routes/home");
 const signupRouter = require("./routes/sign-up");
 const loginRouter = require("./routes/log-in");
@@ -61,7 +60,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/sign-up", signupRouter);
 app.use("/log-in", loginRouter);
 app.use("/logout", logoutRouter);

@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const Message = require("../models/message");
 const session = require("express-session");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
