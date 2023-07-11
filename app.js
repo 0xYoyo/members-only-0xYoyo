@@ -18,6 +18,7 @@ const logoutRouter = require("./routes/logout");
 const joinRouter = require("./routes/join");
 const newMessageRouter = require("./routes/new-message");
 const adminRouter = require("./routes/admin");
+const deleteRouter = require("./routes/delete");
 
 var app = express();
 
@@ -68,6 +69,7 @@ app.use("/home", homeRouter);
 app.use("/join", joinRouter);
 app.use("/new-message", newMessageRouter);
 app.use("/admin", adminRouter);
+app.use("/delete", deleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

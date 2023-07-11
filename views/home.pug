@@ -24,8 +24,9 @@ block content
       h4= message.title 
       p= message.text
     if user.admin 
-    p Click to delete message above:
-        a(href="/message-delete") Delete
+      form(action="/delete", method="post")
+        input#messageid(type='hidden',name='messageid', required='true', value=message._id )
+        button Click to delete message above
   else 
     p There are no messages 
   

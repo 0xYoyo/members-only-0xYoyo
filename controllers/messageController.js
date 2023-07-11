@@ -66,12 +66,8 @@ exports.message_create_post = [
 
 //<----- TO IMPLEMENT LATER FOR ADMIN ----->//
 
-// Display Message delete form on GET.
-exports.message_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Message delete GET");
-});
-
 // Handle Message delete on POST.
 exports.message_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Message delete POST");
+  await Message.findByIdAndDelete(req.body.messageid);
+  res.redirect("/home");
 });
