@@ -7,7 +7,7 @@ const user_controller = require("../controllers/userController");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.redirect("/home");
+  res.render("home", { title: "Home", user: req.user });
 });
 
 module.exports = router;
